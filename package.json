@@ -5,6 +5,8 @@
   "description": "Monorepo for online course platform (React + Node.js + Express).",
   "scripts": {
     "install:all": "npm install && npm --prefix client install && npm --prefix server install",
+    "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server",
+    "start": "npm start --prefix server",
     "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run dev\"",
     "client:dev": "npm --prefix client run dev",
     "server:dev": "npm --prefix server run dev"
