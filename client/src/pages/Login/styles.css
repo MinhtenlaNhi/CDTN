@@ -1,0 +1,337 @@
+.login-page {
+  --login-green: #18a87e;
+  --login-green-dark: #148f6c;
+  --login-text: #1f2937;
+  --login-muted: #6b7280;
+  --login-border: #e5e7eb;
+  --login-bg: #fafafa;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 48px;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  background: var(--login-bg);
+  color: var(--login-text);
+  box-sizing: border-box;
+}
+
+.login-page *,
+.login-page *::before,
+.login-page *::after {
+  box-sizing: inherit;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 40px 36px 44px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f3f4f6;
+}
+
+.login-card__title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--login-green);
+  text-align: center;
+}
+
+.login-card__subtitle {
+  margin: 0 0 28px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--login-muted);
+  text-align: center;
+}
+
+.login-field {
+  margin-bottom: 18px;
+}
+
+.login-field__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--login-green);
+}
+
+.login-field__input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid var(--login-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--login-text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-field__input::placeholder {
+  color: #9ca3af;
+}
+
+.login-field__input:hover {
+  border-color: #d1d5db;
+}
+
+.login-field__input:focus {
+  outline: none;
+  border-color: var(--login-green);
+  box-shadow: 0 0 0 3px rgba(24, 168, 126, 0.15);
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.login-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--login-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-remember input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--login-green);
+  cursor: pointer;
+}
+
+.login-forgot {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--login-green);
+  text-decoration: none;
+}
+
+.login-forgot:hover {
+  text-decoration: underline;
+}
+
+.login-btn-primary {
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--login-green);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.login-btn-primary:hover {
+  background: var(--login-green-dark);
+}
+
+.login-btn-primary:active {
+  transform: scale(0.99);
+}
+
+.login-btn-google {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  background: #fff;
+  border: 1px solid var(--login-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.login-btn-google:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.login-btn-google--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.login-btn-google--disabled:hover {
+  background: #fff;
+  border-color: var(--login-border);
+}
+
+.login-btn-google svg {
+  flex-shrink: 0;
+}
+
+.login-google-err {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #b91c1c;
+  text-align: center;
+}
+
+.login-google-hint {
+  margin: 0 0 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--login-muted);
+  text-align: left;
+}
+
+.login-code {
+  font-size: 11px;
+  word-break: break-all;
+  background: #f3f4f6;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.login-card__extra {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid #f3f4f6;
+  text-align: center;
+}
+
+.login-card__home-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--login-green);
+  text-decoration: none;
+}
+
+.login-card__home-link:hover {
+  text-decoration: underline;
+}
+
+.login-card__signup {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--login-muted);
+}
+
+.login-card__signup-link {
+  font-weight: 600;
+  color: var(--login-green);
+  text-decoration: none;
+}
+
+.login-card__signup-link:hover {
+  text-decoration: underline;
+}
+
+.login-stats {
+  margin-top: 48px;
+  width: 100%;
+  max-width: 520px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.login-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.login-stat__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.login-stat__icon--green {
+  background: #ecfdf5;
+  color: var(--login-green);
+}
+
+.login-stat__icon--orange {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.login-stat__icon--pink {
+  background: #fdf2f8;
+  color: #db2777;
+}
+
+.login-stat__icon--blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.login-stat__value {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--login-text);
+  line-height: 1.2;
+}
+
+.login-stat__label {
+  margin: 2px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--login-muted);
+}
+
+.login-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 22px 36px;
+  }
+
+  .login-stats {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+}
