@@ -148,13 +148,28 @@ function GoogleSignInButton() {
 }
 
 function GoogleSignInPlaceholder() {
+  const isProd = import.meta.env.PROD;
   return (
     <>
       <p className="login-google-hint">
-        Để đăng nhập bằng Gmail/Google, tạo OAuth Client (Web) trong Google Cloud Console và thêm vào file{" "}
-        <code className="login-code">client/.env</code>:{" "}
-        <code className="login-code">VITE_GOOGLE_CLIENT_ID=...apps.googleusercontent.com</code>
-        — thêm <strong>Authorized JavaScript origin</strong>: <code className="login-code">http://localhost:5173</code>
+        {isProd ? (
+          <>
+            Đăng nhập Google chưa bật trên bản đã deploy: biến{" "}
+            <code className="login-code">VITE_GOOGLE_CLIENT_ID</code> phải có{" "}
+            <strong>khi chạy build</strong> (Vite nhúng giá trị vào file JS). Trên Render: Environment → thêm{" "}
+            <code className="login-code">VITE_GOOGLE_CLIENT_ID</code> → deploy lại. Trong Google Cloud Console →
+            OAuth client → <strong>Authorized JavaScript origins</strong> phải có URL trang của bạn (ví dụ{" "}
+            <code className="login-code">https://ten-app.onrender.com</code>), không chỉ localhost.
+          </>
+        ) : (
+          <>
+            Để đăng nhập bằng Gmail/Google, tạo OAuth Client (Web) trong Google Cloud Console và thêm vào file{" "}
+            <code className="login-code">client/.env</code>:{" "}
+            <code className="login-code">VITE_GOOGLE_CLIENT_ID=...apps.googleusercontent.com</code>
+            — thêm <strong>Authorized JavaScript origin</strong>:{" "}
+            <code className="login-code">http://localhost:5173</code>
+          </>
+        )}
       </p>
       <button type="button" className="login-btn-google login-btn-google--disabled" disabled>
         <IconGoogle />
