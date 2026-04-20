@@ -3,13 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "description": "Monorepo for online course platform (React + Node.js + Express).",
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "install:all": "npm install && npm --prefix client install && npm --prefix server install",
-    "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server",
-    "start": "npm start --prefix server",
-    "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run dev\"",
-    "client:dev": "npm --prefix client run dev",
-    "server:dev": "npm --prefix server run dev"
+    "install:all": "npm install",
+    "build": "npm run build -w client",
+    "start": "npm start -w server",
+    "dev": "concurrently \"npm run dev -w client\" \"npm run dev -w server\"",
+    "client:dev": "npm run dev -w client",
+    "server:dev": "npm run dev -w server"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
