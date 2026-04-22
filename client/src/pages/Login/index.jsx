@@ -8,39 +8,6 @@ import "./styles.css";
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 
-function IconGradCap({ className }) {
-  return (
-    <svg className={className} width="24" height="24" viewBox="0 0 24 24" aria-hidden>
-      <path
-        fill="currentColor"
-        d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"
-      />
-    </svg>
-  );
-}
-
-function IconVideo({ className }) {
-  return (
-    <svg className={className} width="24" height="24" viewBox="0 0 24 24" aria-hidden>
-      <path
-        fill="currentColor"
-        d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"
-      />
-    </svg>
-  );
-}
-
-function IconPeople({ className }) {
-  return (
-    <svg className={className} width="24" height="24" viewBox="0 0 24 24" aria-hidden>
-      <path
-        fill="currentColor"
-        d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.96 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-      />
-    </svg>
-  );
-}
-
 function IconGoogle() {
   return (
     <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden>
@@ -64,12 +31,23 @@ function IconGoogle() {
   );
 }
 
-const stats = [
-  { value: "300", label: "Giảng viên", tone: "green", Icon: IconGradCap },
-  { value: "10.000+", label: "Video", tone: "orange", Icon: IconVideo },
-  { value: "20.000+", label: "Học viên", tone: "pink", Icon: IconGradCap },
-  { value: "100.000+", label: "Người dùng", tone: "blue", Icon: IconPeople }
-];
+function IconEyeOpen() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function IconEyeClosed() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
 
 function GoogleSignInButton() {
   const navigate = useNavigate();
@@ -157,8 +135,8 @@ function GoogleSignInPlaceholder() {
             Đăng nhập Google chưa bật trên bản đã deploy: biến{" "}
             <code className="login-code">VITE_GOOGLE_CLIENT_ID</code> phải có{" "}
             <strong>khi chạy build</strong> (Vite nhúng giá trị vào file JS). Trên Render: Environment → thêm{" "}
-            <code className="login-code">VITE_GOOGLE_CLIENT_ID</code> → deploy lại. Trong Google Cloud Console →
-            OAuth client → <strong>Authorized JavaScript origins</strong> phải có URL trang của bạn (ví dụ{" "}
+            <code className="login-code">VITE_GOOGLE_CLIENT_ID</code> → deploy lại. Trong Google Cloud Console → OAuth
+            client → <strong>Authorized JavaScript origins</strong> phải có URL trang của bạn (ví dụ{" "}
             <code className="login-code">https://ten-app.onrender.com</code>), không chỉ localhost.
           </>
         ) : (
@@ -181,9 +159,9 @@ function GoogleSignInPlaceholder() {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [remember, setRemember] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [formErr, setFormErr] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -229,19 +207,23 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="login-wrap">
-        <div className="login-card">
-          <h1 className="login-card__title">WELCOME BACK</h1>
-          <p className="login-card__subtitle">
-            Chào mừng trở lại! Vui lòng nhập thông tin đăng nhập.
-          </p>
+      <header className="login-page__header">
+        <Link to="/" className="login-page__logo">
+          TZONE
+        </Link>
+      </header>
 
-          <form onSubmit={handleSubmit} noValidate>
+      <div className="login-page__split">
+        <div className="login-page__form-col">
+          <h1 className="login-page__title">Đăng nhập</h1>
+
+          <form className="login-form" onSubmit={handleSubmit} noValidate>
             {formErr ? (
               <p className="login-google-err" role="alert">
                 {formErr}
               </p>
             ) : null}
+
             <div className="login-field">
               <label className="login-field__label" htmlFor="login-email">
                 Email
@@ -251,8 +233,8 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="login-field__input"
-                placeholder="Nhập email của bạn"
+                className="login-field__input login-field__input--pill"
+                placeholder="loan@gmail.com"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -261,37 +243,40 @@ export default function LoginPage() {
                 disabled={submitting}
               />
             </div>
+
             <div className="login-field">
               <label className="login-field__label" htmlFor="login-password">
                 Mật khẩu
               </label>
-              <input
-                id="login-password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                className="login-field__input"
-                placeholder="••••••••••"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setFormErr(null);
-                }}
-                disabled={submitting}
-              />
+              <div className="login-field__password-wrap">
+                <input
+                  id="login-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  className="login-field__input login-field__input--pill login-field__input--with-toggle"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setFormErr(null);
+                  }}
+                  disabled={submitting}
+                />
+                <button
+                  type="button"
+                  className="login-password-toggle"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                >
+                  {showPassword ? <IconEyeClosed /> : <IconEyeOpen />}
+                </button>
+              </div>
             </div>
 
-            <div className="login-row">
-              <label className="login-remember">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                />
-                Ghi nhớ đăng nhập
-              </label>
+            <div className="login-forgot-row">
               <a className="login-forgot" href="#forgot">
-                Quên mật khẩu?
+                Quên mật khẩu ?
               </a>
             </div>
 
@@ -302,31 +287,26 @@ export default function LoginPage() {
 
           {googleClientId ? <GoogleSignInButton /> : <GoogleSignInPlaceholder />}
 
-          <div className="login-card__extra">
-            <Link className="login-card__home-link" to="/">
-              Quay lại trang chủ
+          <p className="login-page__footer">
+            Bạn chưa có tài khoản?{" "}
+            <Link className="login-page__footer-link" to="/register">
+              Đăng ký ngay
             </Link>
-            <p className="login-card__signup">
-              Chưa có tài khoản?{" "}
-              <Link className="login-card__signup-link" to="/register">
-                Đăng ký ngay!
-              </Link>
-            </p>
-          </div>
+          </p>
         </div>
 
-        <div className="login-stats" aria-label="Thống kê nền tảng">
-          {stats.map(({ value, label, tone, Icon }) => (
-            <div key={label} className="login-stat">
-              <div className={`login-stat__icon login-stat__icon--${tone}`}>
-                <Icon />
-              </div>
-              <div>
-                <p className="login-stat__value">{value}</p>
-                <p className="login-stat__label">{label}</p>
-              </div>
-            </div>
-          ))}
+        <div className="login-page__art-col" aria-hidden>
+          <div className="login-page__img-wrap">
+            <img
+              className="login-page__img"
+              src="/images/onboarding-illustration.png"
+              alt=""
+              width={520}
+              height={420}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
     </div>

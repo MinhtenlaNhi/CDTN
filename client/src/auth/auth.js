@@ -16,9 +16,8 @@ export function getAuth() {
     if (!raw) return null;
     const data = JSON.parse(raw);
     if (!data?.email) return null;
-    if (!data.role) {
-      data.role = resolveRole(data.email);
-    }
+    // Luôn đồng bộ từ ADMIN_EMAILS — tránh session cũ còn role sai sau khi đổi cấu hình.
+    data.role = resolveRole(data.email);
     return data;
   } catch {
     return null;

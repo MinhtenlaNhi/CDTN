@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AUTH_STORAGE_KEY, getAuth } from "../../auth/auth";
-import { consumePendingRegisterRole, markOnboardingComplete } from "../../auth/onboardingStorage";
+import {
+  clearPendingRegisterRole,
+  consumePendingRegisterRole,
+  markOnboardingComplete
+} from "../../auth/onboardingStorage";
 import "./styles.css";
 
 const ROLE_OPTIONS = [
@@ -15,13 +19,15 @@ export default function OnboardingPage() {
   const [accountType, setAccountType] = useState("student");
 
   useEffect(() => {
-    const pending = consumePendingRegisterRole();
-    if (pending) {
-      setAccountType(pending);
+    // Ưu tiên vai trò đã lưu trong DB (đăng nhập email) — không để "pending" từ /register ghi đè.
+    const fromDb = getAuth()?.accountType;
+    if (fromDb === "student" || fromDb === "teacher") {
+      setAccountType(fromDb);
+      clearPendingRegisterRole();
       return;
     }
-    const a = getAuth()?.accountType;
-    if (a === "student" || a === "teacher") setAccountType(a);
+    const pending = consumePendingRegisterRole();
+    if (pending) setAccountType(pending);
   }, []);
 
   function handleContinue(e) {
