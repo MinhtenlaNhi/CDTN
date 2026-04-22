@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const paymentMethodsData = require("./data/paymentMethods");
 const authRoutes = require("./routes/auth");
-const { isDbReady } = require("./db");
+const { isDbReady, mongoReadyState, hasMongoUriConfigured } = require("./db");
 
 const app = express();
 
@@ -15,7 +15,9 @@ app.get("/api/health", (req, res) => {
   res.json({
     success: true,
     message: "Server is running",
-    mongo: isDbReady() ? "connected" : "disconnected"
+    mongo: isDbReady() ? "connected" : "disconnected",
+    mongoReadyState: mongoReadyState(),
+    mongodbUriSet: hasMongoUriConfigured()
   });
 });
 

@@ -26,4 +26,14 @@ function isDbReady() {
   return connected && mongoose.connection.readyState === 1;
 }
 
-module.exports = { connectDb, isDbReady };
+/** Cho /api/health: 0=ngắt, 1=đã nối, 2=đang nối, 3=đang ngắt */
+function mongoReadyState() {
+  return mongoose.connection.readyState;
+}
+
+function hasMongoUriConfigured() {
+  const u = process.env.MONGODB_URI;
+  return Boolean(u && String(u).trim());
+}
+
+module.exports = { connectDb, isDbReady, mongoReadyState, hasMongoUriConfigured };
